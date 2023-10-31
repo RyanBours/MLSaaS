@@ -22,4 +22,4 @@ jobs:
       - name: Build the Docker image
         run: |
           docker buildx create --use
-          docker buildx build --push --target ${{env.SERVICE_NAME}} --tag ${{vars.REGISTRY}}/ml-saas/${{env.SERVICE_NAME}}:${{ github.run_number }} --platform ${{vars.PLATFORMS}} .
+          docker buildx build --push --target ${{env.SERVICE_NAME}} --tag ${{vars.REGISTRY}}/ml-saas/${{env.SERVICE_NAME}}:latest --platform ${{vars.PLATFORMS}} .
