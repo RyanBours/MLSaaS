@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard-deployment
+  labels:
+    app: dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashboard
+  template:
+    metadata:
+      labels:
+        app: dashboard
+    spec:
+      containers:
+        - name: dashboard
+          image: registry.ryanis.moe/ml-saas/dashboard:latest
+          ports:
+            - containerPort: 3000
+          resources: {}
+      restartPolicy: Always
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service-deployment
+  labels:
+    app: user-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+        - name: user-service
+          image: registry.ryanis.moe/ml-saas/user-service:latest
+          ports:
+            - containerPort: 3000
+          resources: {}
+      restartPolicy: Always
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transcription-service-deployment
+  labels:
+    app: transcription-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: transcription-service
+  template:
+    metadata:
+      labels:
+        app: transcription-service
+    spec:
+      containers:
+        - name: transcription-service
+          image: registry.ryanis.moe/ml-saas/transcription-service:latest
+          ports:
+            - containerPort: 3000
+          resources: {}
+      restartPolicy: Always
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 1
