@@ -71,5 +71,8 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   },
-  "packageManager": "^pnpm@8.8.0"
+  "packageManager": "^pnpm@8.8.0",
+  "files": [
+    "dist"
+  ]
 }
