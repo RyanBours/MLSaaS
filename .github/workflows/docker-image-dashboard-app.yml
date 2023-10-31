@@ -1,0 +1,25 @@
+name: Docker Image CD - dashboard app
+
+env:
+  SERVICE_NAME: dashboard
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "apps/dashboard/**"
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build the Docker image
+        run: |
+          docker buildx create --use
+          docker buildx build --push --target ${{env.SERVICE_NAME}} --tag ${{vars.REGISTRY}}/ml-saas/${{env.SERVICE_NAME}}:${{ github.run_number }} --platform ${{vars.PLATFORMS}} .
