@@ -1,0 +1,12 @@
+federation_version: 2
+sandbox:
+  enabled: true
+subgraphs:
+  users:
+    routing_url: http://127.0.0.1:4001/
+    schema:
+      subgraph_url: http://127.0.0.1:4001/
+  transcriptions:
+    routing_url: http://127.0.0.1:4002/
+    schema:
+      subgraph_url: http://127.0.0.1:4002/
