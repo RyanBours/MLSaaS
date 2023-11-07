@@ -52,12 +52,15 @@ type Transcription
   @join__type(graph: TRANSCRIPTIONS, key: "id")
 {
   id: ID!
+  userId: ID!
   text: String
 }
 
 type User
+  @join__type(graph: TRANSCRIPTIONS, key: "id")
   @join__type(graph: USERS, key: "id")
 {
   id: ID!
-  username: String
+  transcriptions: [Transcription!]! @join__field(graph: TRANSCRIPTIONS)
+  username: String @join__field(graph: USERS)
 }

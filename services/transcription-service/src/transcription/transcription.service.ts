@@ -6,11 +6,13 @@ export class TranscriptionService {
   private readonly transcriptios: Transcription[] = [
     {
       id: 1,
-      text: 'Admin',
+      userId: 1,
+      text: 'Lorem Ipsum',
     },
     {
       id: 2,
-      text: 'User',
+      userId: 2,
+      text: 'Dolar Sit Amet',
     },
   ];
 
@@ -20,5 +22,12 @@ export class TranscriptionService {
 
   findOneById(id: number): Transcription {
     return this.transcriptios.find((transcription) => transcription.id === id);
+  }
+
+  findByUserId(userId: number): Transcription[] {
+    const res = this.transcriptios.filter(
+      (transcription) => transcription.userId === Number(userId),
+    );
+    return res;
   }
 }

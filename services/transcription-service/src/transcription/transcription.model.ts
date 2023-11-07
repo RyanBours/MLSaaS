@@ -6,6 +6,9 @@ export class Transcription {
   @Field((type) => ID)
   id: number;
 
+  @Field((type) => ID)
+  userId: number;
+
   @Field({ nullable: true })
   text?: string;
 }

@@ -1,4 +1,4 @@
-import { Args, Int, Query, Resolver } from '@nestjs/graphql';
+import { Args, Int, Query, ResolveReference, Resolver } from '@nestjs/graphql';
 import { User } from './users.model';
 import { UsersService } from './users.service';
 
@@ -9,5 +9,10 @@ export class UsersResolver {
   @Query((returns) => User)
   async user(@Args('id', { type: () => Int }) id: number) {
     return this.usersService.findOneById(id);
+  }
+
+  @ResolveReference()
+  resolveReference(reference: { __typename: string; id: number }): User {
+    return this.usersService.findOneById(reference.id);
   }
 }
