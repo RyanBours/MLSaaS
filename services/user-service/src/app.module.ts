@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AzureADStrategy } from './auth/strategies/azuread.strategy';
 import { ConfigModule } from '@nestjs/config';
+import { GoogleStrategy } from './auth/strategies/google.strategy';
 
 @Module({
   imports: [
@@ -11,6 +11,6 @@ import { ConfigModule } from '@nestjs/config';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, AzureADStrategy],
+  providers: [AppService, GoogleStrategy],
 })
 export class AppModule {}
