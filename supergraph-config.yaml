@@ -3,10 +3,10 @@ sandbox:
   enabled: true
 subgraphs:
   users:
-    routing_url: http://127.0.0.1:4001/
+    routing_url: http://127.0.0.1:4001/graphql
     schema:
-      subgraph_url: http://127.0.0.1:4001/
+      subgraph_url: http://127.0.0.1:4001/graphql
   transcriptions:
-    routing_url: http://127.0.0.1:4002/
+    routing_url: http://127.0.0.1:4002/graphql
     schema:
-      subgraph_url: http://127.0.0.1:4002/
+      subgraph_url: http://127.0.0.1:4002/graphql

@@ -1,16 +1,24 @@
+import { ApolloFederationDriver, ApolloFederationDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
+import { GraphQLModule } from '@nestjs/graphql';
 import { GoogleStrategy } from './auth/strategies/google.strategy';
+import { transcriptionModule } from './transcription/transcription.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    GraphQLModule.forRoot<ApolloFederationDriverConfig>({
+      driver: ApolloFederationDriver,
+      autoSchemaFile: {
+        federation: 2,
+      },
+    }),
+    transcriptionModule
   ],
-  controllers: [AppController],
-  providers: [AppService, GoogleStrategy],
+  controllers: [],
+  providers: [GoogleStrategy],
 })
 export class AppModule {}
