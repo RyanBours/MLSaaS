@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { GoogleStrategy } from './auth/strategies/google.strategy';
 import { transcriptionModule } from './transcription/transcription.module';
 import { User } from './orphans/user.entity';
+import { GcModule } from './gc/gc.module';
 
 @Module({
   imports: [
@@ -20,9 +21,9 @@ import { User } from './orphans/user.entity';
         orphanedTypes: [User],
       },
     }),
-    transcriptionModule
+    transcriptionModule,
+    GcModule
   ],
-  controllers: [],
   providers: [GoogleStrategy],
 })
 export class AppModule {}

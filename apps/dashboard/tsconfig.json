@@ -12,7 +12,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "src/lib/apollo-wrapper.tsx"  ],
   "exclude": [
     "node_modules"
   ]

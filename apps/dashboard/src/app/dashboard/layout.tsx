@@ -1,4 +1,5 @@
 import Navbar from "../../components/navbar"
+import { ApolloWrapper } from "../../lib/apollo-wrapper"
 
 export default function DashboardLayout({
     children,
@@ -7,8 +8,10 @@ export default function DashboardLayout({
 }) {
     return (
         <>
-            <Navbar />
-            <section>{children}</section>
+            <ApolloWrapper>
+                <Navbar />
+                <>{children}</>
+            </ApolloWrapper>
         </>
     )
 }
