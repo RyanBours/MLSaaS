@@ -45,7 +45,8 @@ type Query
   @join__type(graph: USERS)
 {
   transcription(id: Int!): Transcription! @join__field(graph: TRANSCRIPTIONS)
-  test: String! @join__field(graph: TRANSCRIPTIONS)
+  test(file_name: String!): String! @join__field(graph: TRANSCRIPTIONS)
+  createSignedUrl(file_name: String!): String! @join__field(graph: TRANSCRIPTIONS)
   createTranscription(file_name: String!): String! @join__field(graph: TRANSCRIPTIONS)
   user(id: Int!): User! @join__field(graph: USERS)
 }

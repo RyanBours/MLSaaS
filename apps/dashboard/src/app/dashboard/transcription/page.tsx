@@ -4,30 +4,52 @@ import { gql, useLazyQuery } from "@apollo/client";
 import { v4 as uuidv4 } from 'uuid';
 
 const uploadTranscriptionQuery = gql`
-    query uploadTranscription($fileName: String!) {
-        createTranscription(file_name: $fileName)
+    query createSignedUrl($fileName: String!) {
+        createSignedUrl(file_name: $fileName)
     }
 `;
 
+const createTranscriptionQuery = gql`
+    query createTranscription($fileName: String!) {
+    createTranscription(file_name: $fileName)
+    }
+`;
+
+
 export default function TranscriptionPage() {
-    const [fetchUploadUrl, { called, loading, data }] = useLazyQuery(uploadTranscriptionQuery);
+    const [createUploadUrl, { called, loading }] = useLazyQuery(uploadTranscriptionQuery);
+    const [createTranscription, { called: called2, loading: loading2 }] = useLazyQuery(createTranscriptionQuery);
 
     const uploadFile = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const { data } = await fetchUploadUrl({
+        const uuid = uuidv4();
+
+        const { data } = await createUploadUrl({
             variables: {
-                fileName: uuidv4()
+                fileName: uuid
             }
         })
+
         const formData = new FormData();
         formData.append('file', e.target[0].files[0]);
-        await fetch(data.createTranscription, {
+
+        await fetch(data.createSignedUrl, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/octet-stream"
             },
             body: formData,
-        }).then(res => console.log(res.ok))
+        }).then(res => {
+            if (res.ok) {
+                console.log(uuid);
+                const transcription = createTranscription({
+                    variables: {
+                        fileName: uuid
+                    }
+                })
+                console.log(transcription);
+            }
+        })
     }
     if (called && loading) return <p>Loading ...</p>
     return (

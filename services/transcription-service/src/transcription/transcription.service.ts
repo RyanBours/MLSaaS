@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { Transcription } from './transcription.model';
 import { GcStorageService } from 'src/gc/gs-storage.service';
+import GcSpeechService from 'src/gc/gc-speec.service';
 
 @Injectable()
 export class TranscriptionService {
-  constructor(private readonly gcStorageService: GcStorageService) {}
+  constructor(private readonly gcStorageService: GcStorageService, private readonly gcSpeechService: GcSpeechService) {}
 
   private readonly transcriptios: Transcription[] = [
     {
@@ -37,5 +38,10 @@ export class TranscriptionService {
   async createSignedUrl(file_name: string): Promise<string> {
     const url = await this.gcStorageService.createSignedUrl("mlsaas_transcriptions", file_name);
     return url;
+  }
+
+  async createTranscription(file_name: string) {
+    const result = await this.gcSpeechService.transcribeAudio(file_name);
+    return result;
   }
 }

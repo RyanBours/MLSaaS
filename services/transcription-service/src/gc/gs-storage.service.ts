@@ -6,7 +6,6 @@ import { join } from "path";
 export class GcStorageService {
     storage: any;
     constructor() {
-        console.log(join(__dirname, '../../mlsaas-bf40ffa583a8.json'))
         this.storage = new Storage({
             projectId: 'mlsaas',
             keyFilename: join(__dirname, '../../mlsaas-bf40ffa583a8.json'),
