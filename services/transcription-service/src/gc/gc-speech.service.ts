@@ -12,8 +12,8 @@ export default class GcSpeechService {
         });
     }
 
-    async transcribeAudio(audio: string): Promise<string> {
-        console.log(audio);
+    async transcribeAudio(audio_id: string): Promise<string> {
+        console.log(audio_id);
         const config = {
             encoding: 'MP3',
             sampleRateHertz: 16000,
@@ -21,7 +21,10 @@ export default class GcSpeechService {
         };
         const request = {
             audio: {
-                uri: `gs://mlsaas_transcriptions/03f4521b-a260-4cda-9ca0-c896487c0f7a`
+                uri: `gs://mlsaas_transcriptions/${audio_id}}`
+            },
+            output_config: {
+                gcs_uri: `gs://mlsaas_transcriptions/${audio_id}.json`,
             },
             config: config,
         };

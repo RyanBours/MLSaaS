@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Transcription } from './transcription.model';
 import { GcStorageService } from 'src/gc/gs-storage.service';
-import GcSpeechService from 'src/gc/gc-speec.service';
+import GcSpeechService from 'src/gc/gc-speech.service';
 
 @Injectable()
 export class TranscriptionService {
