@@ -21,20 +21,21 @@ export default class GcSpeechService {
         };
         const request = {
             audio: {
-                uri: `gs://mlsaas_transcriptions/${audio_id}}`
+                uri: `gs://mlsaas_transcriptions/${audio_id}`
             },
-            output_config: {
-                gcs_uri: `gs://mlsaas_transcriptions/${audio_id}.json`,
+            outputConfig: {
+                gcsUri: `gs://mlsaas_transcriptions/${audio_id}.json`,
             },
             config: config,
         };
 
         const [operation] = await this.SpeechClient.longRunningRecognize(request);
-        const [response] = await operation.promise();
-        const transcription = response.results
-            .map(result => result.alternatives[0].transcript)
-            .join('\n');
-        console.log(`Transcription: ${transcription}`);
-        return transcription;
+
+        if (operation.error) {
+            throw operation.error;
+        }
+
+
+        return operation.name
     }
 }

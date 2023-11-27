@@ -26,4 +26,9 @@ export class GcStorageService {
 
         return url;
     }
+
+    async fetchFileContent(bucket_name: string, file_name: string): Promise<string> {
+        const contents = await this.storage.bucket(bucket_name).file(file_name).download();
+        return contents.toString();
+    }
 }
