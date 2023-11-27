@@ -11,14 +11,14 @@ const uploadTranscriptionQuery = gql`
 
 const createTranscriptionQuery = gql`
     query createTranscription($fileName: String!) {
-    createTranscription(file_name: $fileName)
+        createTranscription(file_name: $fileName)
     }
 `;
 
 
 export default function TranscriptionPage() {
     const [createUploadUrl, { called, loading }] = useLazyQuery(uploadTranscriptionQuery);
-    const [createTranscription, { called: called2, loading: loading2 }] = useLazyQuery(createTranscriptionQuery);
+    const [createTranscription, {}] = useLazyQuery(createTranscriptionQuery);
 
     const uploadFile = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -47,7 +47,6 @@ export default function TranscriptionPage() {
                         fileName: uuid
                     }
                 })
-                console.log(transcription);
             }
         })
     }

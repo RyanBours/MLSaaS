@@ -3,9 +3,10 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { GoogleStrategy } from './auth/strategies/google.strategy';
-import { transcriptionModule } from './transcription/transcription.module';
+import { TranscriptionModule } from './transcription/transcription.module';
 import { User } from './orphans/user.entity';
 import { GcModule } from './gc/gc.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { GcModule } from './gc/gc.module';
         orphanedTypes: [User],
       },
     }),
-    transcriptionModule,
+    TranscriptionModule,
     GcModule
   ],
   providers: [GoogleStrategy],
