@@ -76,7 +76,7 @@ export class TranscriptionService {
   }
 
   async fetchTranscriptionFromGC(transcription_id: string) {
-    const file_content = await this.gcStorageService.fetchFileContent("mlsaas_transcriptions", transcription_id);
+    const file_content = await this.gcStorageService.fetchFileContent("mlsaas_transcriptions", transcription_id + ".json");
     return file_content;
   }
 }
