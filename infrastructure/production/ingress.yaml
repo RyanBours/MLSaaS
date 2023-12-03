@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: turbo-nest-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: turbo-nest.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: dashboard
+                port:
+                  number: 80
+          - path: /api/user
+            pathType: Prefix
+            backend:
+              service:
+                name: user-service
+                port:
+                  number: 80
+          - path: /api/transcription
+            pathType: Prefix
+            backend:
+              service:
+                name: transcription-service
+                port:
+                  number: 80

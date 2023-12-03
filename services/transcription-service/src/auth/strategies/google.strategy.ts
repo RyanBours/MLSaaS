@@ -5,28 +5,22 @@ import * as jwksRsa from 'jwks-rsa';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
-export class AzureADStrategy extends PassportStrategy(Strategy, 'AzureAD') {
+export class GoogleStrategy extends PassportStrategy(Strategy, 'Google') {
   constructor(protected readonly configService: ConfigService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      audience: configService.get('AZURE_AD_AUDIENCE'),
-      issuer: `https://sts.windows.net/${configService.get(
-        'AZURE_AD_TENANTID',
-      )}/`,
-      algorithms: ['RS256'],
       ignoreExpiration: true,
       secretOrKeyProvider: jwksRsa.passportJwtSecret({
         cache: true,
         rateLimit: true,
         jwksRequestsPerMinute: 5,
-        jwksUri: `https://login.microsoftonline.com/${configService.get(
-          'AZURE_AD_TENANTID',
-        )}/discovery/v2.0/keys`,
+        jwksUri: `https://www.googleapis.com/oauth2/v3/certs`,
       }),
     });
   }
 
   validate(payload: any) {
+    console.log(payload);
     return payload;
   }
 }

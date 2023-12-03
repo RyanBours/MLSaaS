@@ -5,7 +5,9 @@
     "dev": "turbo run dev",
     "test": "turbo run test",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "compose:graph": "rover supergraph compose --config supergraph-config.yaml > supergraph.graphql --elv2-license accept",
+    "router": ".\\router\\router.exe --supergraph .\\supergraph.graphql --config .\\router\\config.yaml --hot-reload"
   },
   "devDependencies": {
     "eslint": "^8.48.0",
