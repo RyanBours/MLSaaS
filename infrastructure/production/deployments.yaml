@@ -46,7 +46,7 @@ spec:
         - name: user-service
           image: registry.ryanis.moe/ml-saas/user-service:latest
           ports:
-            - containerPort: 3000
+            - containerPort: 4001
           resources: {}
       restartPolicy: Always
 strategy:
@@ -74,7 +74,7 @@ spec:
         - name: transcription-service
           image: registry.ryanis.moe/ml-saas/transcription-service:latest
           ports:
-            - containerPort: 3000
+            - containerPort: 4002
           resources: {}
       restartPolicy: Always
 strategy:
