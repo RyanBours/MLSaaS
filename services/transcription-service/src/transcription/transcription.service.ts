@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Transcription } from './transcription.model';
-import { GcStorageService } from 'src/gc/gc-storage.service';
-import { GcSpeechService } from 'src/gc/gc-speech.service';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { GcStorageService } from '../gc/gc-storage.service';
+import { GcSpeechService } from '../gc/gc-speech.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class TranscriptionService {

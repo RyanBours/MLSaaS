@@ -1,6 +1,6 @@
 import { Parent, ResolveField, Resolver } from '@nestjs/graphql';
 import { TranscriptionService } from './transcription.service';
-import { User } from 'src/orphans/user.entity';
+import { User } from '../orphans/user.entity';
 import { Transcription } from './transcription.model';
 
 

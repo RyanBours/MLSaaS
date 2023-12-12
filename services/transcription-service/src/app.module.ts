@@ -3,9 +3,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { GoogleStrategy } from './auth/strategies/google.strategy';
-import { TranscriptionModule } from './transcription/transcription.module';
-import { User } from './orphans/user.entity';
 import { GcModule } from './gc/gc.module';
+import { User } from './orphans/user.entity';
+import { TranscriptionModule } from './transcription/transcription.module';
 import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
@@ -23,8 +23,10 @@ import { PrismaModule } from './prisma/prisma.module';
       },
     }),
     TranscriptionModule,
-    GcModule
+    GcModule,
+    PrismaModule,
   ],
   providers: [GoogleStrategy],
+
 })
 export class AppModule {}
