@@ -1,6 +1,6 @@
 import { Module, forwardRef } from "@nestjs/common";
-import GcSpeechService from "./gc-speech.service";
-import { GcStorageService } from "./gs-storage.service";
+import { GcSpeechService } from "./gc-speech.service";
+import { GcStorageService } from "./gc-storage.service";
 import { GcController } from './gc.controller';
 import { TranscriptionModule } from "src/transcription/transcription.module";
 

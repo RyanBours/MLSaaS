@@ -3,7 +3,7 @@ import { SpeechClient } from "@google-cloud/speech";
 import { join } from "path";
 
 @Injectable()
-export default class GcSpeechService {
+export class GcSpeechService {
     SpeechClient: any;
     constructor() {
         this.SpeechClient = new SpeechClient({
