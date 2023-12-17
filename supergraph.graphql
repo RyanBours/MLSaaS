@@ -53,6 +53,7 @@ type Query
   @join__type(graph: USERS)
 {
   transcription(id: Int!): Transcription! @join__field(graph: TRANSCRIPTIONS)
+  transcriptions: [Transcription!]! @join__field(graph: TRANSCRIPTIONS)
   fetchTranscription(transcription_id: String!): String! @join__field(graph: TRANSCRIPTIONS)
   user(id: Int!): User! @join__field(graph: USERS)
 }
@@ -62,7 +63,8 @@ type Transcription
 {
   id: ID!
   userId: ID!
-  text: String
+  transcriptionId: String!
+  status: String!
 }
 
 type User
