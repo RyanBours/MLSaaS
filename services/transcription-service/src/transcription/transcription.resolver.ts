@@ -8,7 +8,12 @@ export class TranscriptionResolver {
 
   @Query((returns) => Transcription)
   async transcription(@Args('id', { type: () => Int }) id: number) {
-    return this.transcriptionService.findOneById(id);
+    return await this.transcriptionService.findOneById(id);
+  }
+
+  @Query((returns) => [Transcription])
+  async transcriptions() {
+    return await this.transcriptionService.findAll();
   }
 
   @Mutation((returns) => String)

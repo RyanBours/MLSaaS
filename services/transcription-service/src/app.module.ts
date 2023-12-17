@@ -6,7 +6,7 @@ import { GoogleStrategy } from './auth/strategies/google.strategy';
 import { GcModule } from './gc/gc.module';
 import { User } from './orphans/user.entity';
 import { TranscriptionModule } from './transcription/transcription.module';
-import { PrismaModule } from './prisma/prisma.module';
+import { PrismaModule } from 'src/prisma/prisma.module';
 
 @Module({
   imports: [
