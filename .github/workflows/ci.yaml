@@ -2,10 +2,9 @@ name: CI
 
 on:
   workflow_dispatch:
+  workflow_call:
   push:
-    branches: ["main", "develop"]
-  pull_request:
-    types: [opened, synchronize]
+    branches: ["develop"]
 
 jobs:
   build:
