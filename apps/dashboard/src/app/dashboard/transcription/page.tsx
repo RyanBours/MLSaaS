@@ -1,23 +1,23 @@
 'use client';
 
-import { gql, useLazyQuery } from "@apollo/client";
-import { useEffect, useRef, useState } from "react";
+import { gql, useLazyQuery, useMutation } from "@apollo/client";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 const uploadTranscriptionQuery = gql`
-    query createSignedUrl($fileName: String!) {
+    mutation createSignedUrl($fileName: String!) {
         createSignedUrl(file_name: $fileName)
     }
 `;
 
 const createTranscriptionQuery = gql`
-    query createTranscription($fileName: String!) {
+    mutation createTranscription($fileName: String!) {
         createTranscription(file_name: $fileName)
     }
 `;
 
 const fetchTranscriptionQuery = gql`
-    query Query($transcriptionId: String!) {
+    query fetchTranscription($transcriptionId: String!) {
         fetchTranscription(transcription_id: $transcriptionId)
     }
 `;
@@ -25,8 +25,8 @@ const fetchTranscriptionQuery = gql`
 
 export default function TranscriptionPage() {
     const [uuid, setUuid] = useState('');
-    const [createUploadUrl, { called, loading }] = useLazyQuery(uploadTranscriptionQuery);
-    const [createTranscription] = useLazyQuery(createTranscriptionQuery);
+    const [createUploadUrl, { called, loading }] = useMutation(uploadTranscriptionQuery);
+    const [createTranscription] = useMutation(createTranscriptionQuery);
     const [fetchTranscription, { data: transcription_data, stopPolling }] = useLazyQuery(fetchTranscriptionQuery, { pollInterval: 1000 });
 
     const [inProgress, setInProgress] = useState(false);

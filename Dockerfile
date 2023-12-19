@@ -21,7 +21,7 @@ WORKDIR /prod/user-service
 EXPOSE 4001
 CMD [ "node", "dist/main.js" ]
 
-FROM build as dashboard
+FROM build AS dashboard
 RUN pnpm deploy --filter=dashboard --prod /prod/dashboard
 ENV NODE_ENV=production
 WORKDIR /prod/dashboard

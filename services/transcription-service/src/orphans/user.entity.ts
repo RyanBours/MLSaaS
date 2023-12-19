@@ -1,6 +1,6 @@
 
 import { Directive, ObjectType, Field, ID } from '@nestjs/graphql';
-import { Transcription } from 'src/transcription/transcription.model';
+import { Transcription } from '../transcription/transcription.model';
 
 @ObjectType()
 @Directive('@key(fields: "id")')

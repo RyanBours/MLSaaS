@@ -9,6 +9,9 @@ export class Transcription {
   @Field((type) => ID)
   userId: number;
 
-  @Field({ nullable: true })
-  text?: string;
+  @Field((type) => String)
+  transcriptionId: string;
+
+  @Field((type) => String)
+  status: string;
 }

@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Transcription } from './transcription.model';
-import { GcStorageService } from 'src/gc/gs-storage.service';
-import GcSpeechService from 'src/gc/gc-speech.service';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { Prisma } from '@prisma/client';
+import { GcStorageService } from '../gc/gc-storage.service';
+import { GcSpeechService } from '../gc/gc-speech.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class TranscriptionService {
@@ -13,31 +12,24 @@ export class TranscriptionService {
     private readonly prismaService: PrismaService
   ) {}
 
-  private readonly transcriptios: Transcription[] = [
-    {
-      id: 1,
-      userId: 1,
-      text: 'Lorem Ipsum',
-    },
-    {
-      id: 2,
-      userId: 2,
-      text: 'Dolar Sit Amet',
-    },
-  ];
-
-  findAll(): Transcription[] {
-    return this.transcriptios;
+  async findAll(): Promise<Transcription[]> {
+    return this.prismaService.transcription.findMany();
   }
 
-  findOneById(id: number): Transcription {
-    return this.transcriptios.find((transcription) => transcription.id === id);
+  async findOneById(id: number): Promise<Transcription> {
+    return this.prismaService.transcription.findUnique({
+      where: {
+        id: id
+      }
+    })
   }
 
-  findByUserId(userId: number): Transcription[] {
-    const res = this.transcriptios.filter(
-      (transcription) => transcription.userId === Number(userId),
-    );
+  async findByUserId(user_id: number): Promise<Transcription[]> {
+    const res = await this.prismaService.transcription.findMany({
+      where: {
+        userId: user_id
+      }
+    })
     return res;
   }
 

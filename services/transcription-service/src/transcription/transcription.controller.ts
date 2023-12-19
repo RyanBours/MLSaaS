@@ -1,10 +1,10 @@
 import { Controller } from '@nestjs/common';
 import { Ctx, MessagePattern } from '@nestjs/microservices';
 import { GCPubSubContext } from 'nestjs-google-pubsub-microservice';
-import { TranscriptionService } from 'src/transcription/transcription.service';
+import { TranscriptionService } from '../transcription/transcription.service';
 
-@Controller('gc')
-export class GcController {
+@Controller('transcription')
+export class TranscriptioController {
     constructor(
         private readonly transcriptionService: TranscriptionService
     ) {}

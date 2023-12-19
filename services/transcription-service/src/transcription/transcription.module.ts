@@ -1,14 +1,15 @@
-import { Module, forwardRef } from '@nestjs/common';
-import { TranscriptionService } from './transcription.service';
+import { Module } from '@nestjs/common';
+import { GcModule } from '../gc/gc.module';
+import { PrismaModule } from '../prisma/prisma.module';
+import { TranscriptioController } from './transcription.controller';
 import { TranscriptionResolver } from './transcription.resolver';
+import { TranscriptionService } from './transcription.service';
 import { UsersResolver } from './user.resolver';
-import { GcModule } from 'src/gc/gc.module';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { PrismaModule } from 'src/prisma/prisma.module';
 
 @Module({
+  controllers: [TranscriptioController],
   providers: [TranscriptionResolver, TranscriptionService, UsersResolver],
   exports: [TranscriptionService],
-  imports: [forwardRef(() => GcModule), PrismaModule],
+  imports: [GcModule, PrismaModule],
 })
 export class TranscriptionModule {}

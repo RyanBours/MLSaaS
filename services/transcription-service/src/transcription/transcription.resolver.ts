@@ -1,4 +1,4 @@
-import { Args, Int, Query, Resolver } from '@nestjs/graphql';
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Transcription } from './transcription.model';
 import { TranscriptionService } from './transcription.service';
 
@@ -8,16 +8,21 @@ export class TranscriptionResolver {
 
   @Query((returns) => Transcription)
   async transcription(@Args('id', { type: () => Int }) id: number) {
-    return this.transcriptionService.findOneById(id);
+    return await this.transcriptionService.findOneById(id);
   }
 
-  @Query((returns) => String)
+  @Query((returns) => [Transcription])
+  async transcriptions() {
+    return await this.transcriptionService.findAll();
+  }
+
+  @Mutation((returns) => String)
   createSignedUrl(@Args('file_name') file_name: string) {
     const url = this.transcriptionService.createSignedUrl(file_name);
     return url;
   }
 
-  @Query((returns) => String)
+  @Mutation((returns) => String)
   createTranscription(@Args('file_name') file_name: string) {
     const url = this.transcriptionService.createTranscription(file_name);
     return url;

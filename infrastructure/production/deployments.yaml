@@ -4,6 +4,7 @@ metadata:
   name: dashboard-deployment
   labels:
     app: dashboard
+  namespace: ml-saas
 spec:
   replicas: 1
   selector:
@@ -28,6 +29,8 @@ metadata:
   name: user-service-deployment
   labels:
     app: user-service
+  namespace: ml-saas
+
 spec:
   replicas: 1
   selector:
@@ -52,6 +55,7 @@ metadata:
   name: transcription-service-deployment
   labels:
     app: transcription-service
+  namespace: ml-saas
 spec:
   replicas: 1
   selector:
