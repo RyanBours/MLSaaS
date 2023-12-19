@@ -11,6 +11,8 @@ on:
       - "services/user-service/**"
   pull_request:
     branches: ["main"]
+    paths:
+      - "services/user-service/**"
 
 jobs:
   testing:

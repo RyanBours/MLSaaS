@@ -11,6 +11,8 @@ on:
       - "apps/dashboard/**"
   pull_request:
     branches: ["main"]
+    paths:
+      - "apps/dashboard/**"
 
 jobs:
   testing:
