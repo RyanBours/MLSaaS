@@ -2,10 +2,9 @@
 app:
   applicationId: d686b4eb-5759-408f-836c-f46147026f3c # (required)
   env: Development # (required)
-  host: http://registry.ryanis.moe:4000 # (required)
+  host: http://router.ryanis.moe:4000/graphql # (required)
 
-
-  graphqlConf: 
+  graphqlConf:
     enabled: true
     schemaPath: /
     operation: ALL
