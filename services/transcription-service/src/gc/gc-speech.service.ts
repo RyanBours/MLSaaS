@@ -1,11 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { SpeechClient } from "@google-cloud/speech";
-import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class GcSpeechService {
     SpeechClient: any;
-    constructor(private readonly configService: ConfigService) {
+    constructor() {
         this.SpeechClient = new SpeechClient({
             projectId: 'mlsaas',
         });

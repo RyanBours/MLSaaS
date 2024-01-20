@@ -5,8 +5,6 @@ import { GcStorageService } from "../gc/gc-storage.service";
 import { GcSpeechService } from "../gc/gc-speech.service";
 import { ConfigService } from "@nestjs/config";
 import { Transcription } from "./transcription.model";
-import { INestApplication } from "@nestjs/common";
-import * as request from 'supertest';
 
 const transcriptions: Transcription[] = [
     {
