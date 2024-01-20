@@ -1,4 +1,4 @@
-import { Args, Int, Query, ResolveReference, Resolver } from '@nestjs/graphql';
+import { Args, Int, Mutation, Query, ResolveReference, Resolver } from '@nestjs/graphql';
 import { User } from './users.model';
 import { UsersService } from './users.service';
 
@@ -14,5 +14,10 @@ export class UsersResolver {
   @ResolveReference()
   resolveReference(reference: { __typename: string; id: number }): User {
     return this.usersService.findOneById(reference.id);
+  }
+
+  @Mutation((returns) => User)
+  async deleteUser(@Args('id', { type: () => Int }) id: number) {
+    return this.usersService.deleteUser(id);
   }
 }

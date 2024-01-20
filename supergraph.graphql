@@ -43,9 +43,11 @@ enum link__Purpose {
 
 type Mutation
   @join__type(graph: TRANSCRIPTIONS)
+  @join__type(graph: USERS)
 {
-  createSignedUrl(file_name: String!): String!
-  createTranscription(file_name: String!): String!
+  createSignedUrl(file_name: String!): String! @join__field(graph: TRANSCRIPTIONS)
+  createTranscription(file_name: String!): String! @join__field(graph: TRANSCRIPTIONS)
+  deleteUser(id: Int!): User! @join__field(graph: USERS)
 }
 
 type Query

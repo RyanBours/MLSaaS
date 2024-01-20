@@ -3,13 +3,18 @@ kind: Ingress
 metadata:
   name: ml-saas-ingress
   namespace: ml-saas
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: ml-saas-ip
+    networking.gke.io/managed-certificates: ml-saas-certificate
+    networking.gke.io/v1beta1.FrontendConfig: ingress-security-config
+    ingressClassName: "gce"
 spec:
   rules:
-    - host: mlsaas.ryanis.moe
+    - host: dashboard.ryanis.moe
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - pathType: Prefix
+            path: "/"
             backend:
               service:
                 name: dashboard
@@ -18,8 +23,8 @@ spec:
     - host: user.ryanis.moe
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - pathType: Prefix
+            path: "/graphql"
             backend:
               service:
                 name: user-service
@@ -28,8 +33,8 @@ spec:
     - host: transcription.ryanis.moe
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - pathType: Prefix
+            path: "/"
             backend:
               service:
                 name: transcription-service

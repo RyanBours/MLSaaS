@@ -3,6 +3,13 @@
   "globalDependencies": [
     "**/.env.*local"
   ],
+  "globalEnv": [
+    "GOOGLE_CLIENT_ID",
+    "GOOGLE_CLIENT_SECRET",
+    "NEXTAUTH_SECRET",
+    "NEXTAUTH_URL",
+    "ROUTER"
+  ],
   "pipeline": {
     "build": {
       "dependsOn": [
@@ -10,20 +17,23 @@
       ],
       "outputs": [
         ".next/**",
-        "!.next/cache/**"
+        "!.next/cache/**",
+        "dist/**"
       ]
     },
-    "lint": {},
+    "lint": {
+      "dependsOn": [
+        "^lint"
+      ]
+    },
     "start:dev": {
       "cache": false,
       "persistent": true
     },
-    "test": {},
-    "test:watch": {
-      "cache": false
-    },
-    "test:e2e": {
-      "cache": false
+    "test": {
+      "dependsOn": [
+        "^build"
+      ]
     }
   }
 }

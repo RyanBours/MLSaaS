@@ -7,11 +7,21 @@ import { GcModule } from './gc/gc.module';
 import { User } from './orphans/user.entity';
 import { TranscriptionModule } from './transcription/transcription.module';
 import { PrismaModule } from 'src/prisma/prisma.module';
+import { PrometheusModule } from '@willsoto/nestjs-prometheus';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+    }),
+    PrometheusModule.register({
+      path: 'metrics',
+      defaultMetrics: {
+        enabled: true,
+        config: {
+          prefix: 'transcription_',
+        },
+      },
     }),
     GraphQLModule.forRoot<ApolloFederationDriverConfig>({
       driver: ApolloFederationDriver,

@@ -1,0 +1,10 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: ml-saas-certificate
+  namespace: ml-saas
+spec:
+  domains:
+    - dashboard.ryanis.moe
+    - user.ryanis.moe
+    - transcription.ryanis.moe

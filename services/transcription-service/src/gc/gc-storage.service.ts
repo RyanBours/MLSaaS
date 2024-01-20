@@ -1,14 +1,13 @@
 import { Injectable } from "@nestjs/common";
 import { Storage } from '@google-cloud/storage';
-import { join } from "path";
+import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class GcStorageService {
     storage: any;
-    constructor() {
+    constructor(private readonly configService: ConfigService) {
         this.storage = new Storage({
             projectId: 'mlsaas',
-            keyFilename: join(__dirname, '../../mlsaas-bf40ffa583a8.json'),
         });
     }
 

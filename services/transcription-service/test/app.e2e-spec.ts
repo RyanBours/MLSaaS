@@ -26,4 +26,10 @@ describe('AppController (e2e)', () => {
       .get('/graphql')
       .expect(400)
   });
+
+  it('/metrics (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/metrics')
+      .expect(200)
+  });
 });

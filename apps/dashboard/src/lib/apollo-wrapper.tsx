@@ -13,9 +13,8 @@ import {
 
 function makeClient() {
     const httpLink = new HttpLink({
-        uri: "http://localhost:4000",
-        // TODO: Add auth token
-        // TODO: Add to env
+        uri: process.env.ROUTER ?? "http://localhost:4000",
+        // credentials: 'include'
     });
 
     return new NextSSRApolloClient({

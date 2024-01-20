@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Param, ParseIntPipe } from '@nestjs/common';
 import { Transcription } from './transcription.model';
 import { GcStorageService } from '../gc/gc-storage.service';
 import { GcSpeechService } from '../gc/gc-speech.service';
@@ -27,7 +27,7 @@ export class TranscriptionService {
   async findByUserId(user_id: number): Promise<Transcription[]> {
     const res = await this.prismaService.transcription.findMany({
       where: {
-        userId: user_id
+        userId: parseInt(user_id.toString())
       }
     })
     return res;

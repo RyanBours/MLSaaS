@@ -1,0 +1,14 @@
+# -- stackhawk configuration for MLSaaS --
+app:
+  applicationId: d686b4eb-5759-408f-836c-f46147026f3c # (required)
+  env: Development # (required)
+  host: http://registry.ryanis.moe:4000 # (required)
+
+
+  graphqlConf: 
+    enabled: true
+    schemaPath: /
+    operation: ALL
+    requestMethod: POST
+  autoPolicy: true
+  autoInputVectors: true

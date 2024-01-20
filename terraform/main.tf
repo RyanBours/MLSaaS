@@ -28,7 +28,7 @@ resource "google_storage_bucket" "mlsaas_transcriptions" {
   }
 
   cors {
-    origin          = ["http://localhost:3000"]
+    origin          = ["http://localhost:3000", "http://34.140.238.118:80", "https://dashboard.ryanis.moe", "http://dashboard.ryanis.moe"]
     method          = ["GET", "PUT"]
     response_header = ["*"]
     max_age_seconds = 3600
@@ -51,4 +51,15 @@ resource "google_storage_notification" "notification" {
   payload_format = "JSON_API_V1"
   topic          = google_pubsub_topic.transcription-created.name
   event_types    = ["OBJECT_FINALIZE"]
+}
+
+resource "google_pubsub_topic" "user-deleted" {
+  name                       = "user-deleted"
+  project                    = var.project
+  message_retention_duration = "604800s" # 7 days
+}
+
+resource "google_pubsub_subscription" "users" {
+  name  = "users"
+  topic = google_pubsub_topic.user-deleted.name
 }

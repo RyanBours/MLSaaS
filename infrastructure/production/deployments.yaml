@@ -18,6 +18,9 @@ spec:
       containers:
         - name: dashboard
           image: registry.ryanis.moe/ml-saas/dashboard:latest
+          env:
+            - name: NEXTAUTH_URL
+              value: https://dashboard.ryanis.moe
           ports:
             - containerPort: 3000
           resources: {}
@@ -69,7 +72,26 @@ spec:
       containers:
         - name: transcription-service
           image: registry.ryanis.moe/ml-saas/transcription-service:latest
+          env:
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /etc/gcp/sa_credentials.json
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: database-secret
+                  key: url
+          volumeMounts:
+            - name: service-account-credentials-volume
+              mountPath: "/etc/gcp"
+              readOnly: true
           ports:
             - containerPort: 4002
           resources: {}
+      volumes:
+        - name: service-account-credentials-volume
+          secret:
+            secretName: service-account-credentials
+            items:
+              - key: sa_json
+                path: sa_credentials.json
       restartPolicy: Always

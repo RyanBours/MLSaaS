@@ -16,10 +16,12 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'Google') {
         jwksRequestsPerMinute: 5,
         jwksUri: `https://www.googleapis.com/oauth2/v3/certs`,
       }),
+      pssReqToCallback: true,
     });
   }
 
   validate(payload: any) {
+    console.log('validate');
     console.log(payload);
     return payload;
   }

@@ -1,6 +1,6 @@
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
-import { GoogleSignInButton } from '../components/authButtons';
+import { GoogleSignInButton } from '../components/auth-buttons';
 import { authOptions } from '../lib/auth';
 
 export default async function Landing() {

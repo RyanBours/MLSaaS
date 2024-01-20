@@ -1,2 +1,6 @@
 cors:
-  allow_any_origin: true
+  origins:
+    - http://localhost:3000
+    - https://studio.apollographql.com
+    - https://dashboard.ryanis.moe
+    - http://34.140.238.118

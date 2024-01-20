@@ -16,7 +16,7 @@ import { UsersModule } from './users/users.module';
         federation: 2,
       },
     }),
-    UsersModule
+    UsersModule,
   ],
   providers: [GoogleStrategy],
 })

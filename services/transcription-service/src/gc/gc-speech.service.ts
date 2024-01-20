@@ -1,14 +1,13 @@
 import { Injectable } from "@nestjs/common";
 import { SpeechClient } from "@google-cloud/speech";
-import { join } from "path";
+import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class GcSpeechService {
     SpeechClient: any;
-    constructor() {
+    constructor(private readonly configService: ConfigService) {
         this.SpeechClient = new SpeechClient({
             projectId: 'mlsaas',
-            keyFilename: join(__dirname, '../../mlsaas-bf40ffa583a8.json'),
         });
     }
 
