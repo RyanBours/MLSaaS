@@ -13,7 +13,8 @@ export class UsersResolver {
 
   @ResolveReference()
   resolveReference(reference: { __typename: string; id: number }): User {
-    return this.usersService.findOneById(reference.id);
+    const user = this.usersService.findOneById(parseInt(reference.id.toString()));
+    return user
   }
 
   @Mutation((returns) => User)

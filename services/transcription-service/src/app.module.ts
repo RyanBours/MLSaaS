@@ -8,6 +8,7 @@ import { User } from './orphans/user.entity';
 import { TranscriptionModule } from './transcription/transcription.module';
 import { PrismaModule } from 'src/prisma/prisma.module';
 import { PrometheusModule } from '@willsoto/nestjs-prometheus';
+import { ComplexityPlugin } from './plugins/gql-complexity.plugin';
 
 @Module({
   imports: [
@@ -36,7 +37,7 @@ import { PrometheusModule } from '@willsoto/nestjs-prometheus';
     GcModule,
     PrismaModule,
   ],
-  providers: [GoogleStrategy],
+  providers: [GoogleStrategy, ComplexityPlugin],
 
 })
 export class AppModule {}

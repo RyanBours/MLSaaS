@@ -1,11 +1,12 @@
-import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Int, Mutation, Parent, Query, ResolveField, ResolveReference, Resolver } from '@nestjs/graphql';
 import { Transcription } from './transcription.model';
 import { TranscriptionService } from './transcription.service';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/auth/gqlAuthGuard';
 import { MetricsService } from 'src/metrics/metrics.service';
+import { User } from '../orphans/user.entity';
 
-@Resolver('Transcription')
+@Resolver(() => Transcription)
 export class TranscriptionResolver {
   constructor(private transcriptionService: TranscriptionService, private metrics: MetricsService) {}
 
@@ -14,7 +15,7 @@ export class TranscriptionResolver {
     return await this.transcriptionService.findOneById(id);
   }
 
-  // @UseGuards(GqlAuthGuard)
+  @UseGuards(GqlAuthGuard)
   @Query((returns) => [Transcription])
   async transcriptions() {
     return await this.transcriptionService.findAll();
@@ -39,4 +40,10 @@ export class TranscriptionResolver {
     const transcription_text = this.transcriptionService.fetchTranscriptionFromGC(transcription_id);
     return transcription_text;
   }
+
+  @ResolveField((returns) => User)
+  user(@Parent() transcription: Transcription) {
+    return { __typename: 'User', id: transcription.userId };
+  }
+
 }
